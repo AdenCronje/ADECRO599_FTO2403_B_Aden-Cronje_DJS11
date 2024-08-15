@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome to our Podcast App</h1>
-      <Link>Find your first show</Link>
+      <Link to="" className="text-xl font-bold">Find your first show</Link>
     </div>
   );
 }
