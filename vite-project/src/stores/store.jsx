@@ -1,7 +1,43 @@
 import { create } from "zustand";
 
 const usePreviewStore = create((set) => ({
-// Stores initial state
+  // Stores initial state
+  // Adding previews data to localstorage
   previews: JSON.parse(localStorage.getItem("previews")) || null,
   error: null,
+
+  fetchAllShows: async () => {
+    try {
+      // Fetching all shows data
+      let previewAllShows = JSON.parse(localStorage.getItem("previews"));
+      if (!previewAllShows) {
+        const response = await fetch("https://podcast-api.netlify.app");
+        previewAllShows = await response.json();
+        localStorage.setItem("previews", JSON.stringify(previewAllShows));
+        set({ previews: previewAllShows, error: null });
+      }
+    } catch (error) {
+      set({ previews: null, error: error });
+      console.log(error, "error fetching");
+      console.error("error previews not fetched", error);
+    }
+  },
+
+  // Fetching a single show
+  fetchSingleShow: async (previewId) => {
+    try {
+      let previewAllShows = JSON.parse(localStorage.getItem("previews"));
+      const singlePreview = previewAllShows.find(
+        (preview) => preview.id == previewId
+      );
+      console.log(typeof previewId);
+      return singlePreview;
+    } catch (error) {
+      // return null if error
+      console.error("error fetching product: ", error);
+      return null;
+    }
+  },
 }));
+
+export default usePreviewStore;
