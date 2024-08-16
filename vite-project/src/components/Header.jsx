@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <header>
-      <Link to="/">#Casts</Link>
-      <nav></nav>
+      <nav>
+        <Link to="/">#Casts</Link>
+      </nav>
     </header>
   );
 }

@@ -1,6 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Header from "./Header";
 
 export default function Shows() {
-  return <h1>All shows display here</h1>;
+  return (
+    <>
+      <h1>All shows display here</h1>
+      <div>
+        <Header />
+      </div>
+    </>
+  );
 }
