@@ -5,9 +5,11 @@ import Header from "./Header";
 export default function Shows() {
   return (
     <>
-      <h1>All shows display here</h1>
+      {/* <h1>All shows display here</h1> */}
       <div>
-        <Header />
+        <nav>
+          <Header />
+        </nav>
       </div>
     </>
   );

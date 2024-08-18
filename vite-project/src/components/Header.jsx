@@ -5,7 +5,12 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <Link to="/">#Casts</Link>
+        <li>
+          <Link to="/">Homepage</Link>
+        </li>
+        <li>
+          <Link className="nav">Favorites</Link>
+        </li>
       </nav>
     </header>
   );
