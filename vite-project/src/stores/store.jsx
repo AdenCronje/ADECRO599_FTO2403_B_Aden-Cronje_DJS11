@@ -6,9 +6,10 @@ const usePreviewStore = create((set) => ({
   previews: JSON.parse(localStorage.getItem("previews")) || [],
   error: null,
 
+  // Fetch and store all shows
   fetchAllShows: async () => {
     try {
-      // Adding every fetched shows data into localstorage
+      // Checking every fetched shows data are in localstorage
       let previewAllShows = JSON.parse(localStorage.getItem("previews"));
       if (!previewAllShows) {
         // Fetching all shows data
@@ -19,7 +20,7 @@ const usePreviewStore = create((set) => ({
       }
       // Checking for any errors while fetching
     } catch (error) {
-      set({ previews: null, error: error });
+      set({ previews: [], error: error });
       console.log(error, "error fetching");
       console.error("error previews not fetched", error);
     }

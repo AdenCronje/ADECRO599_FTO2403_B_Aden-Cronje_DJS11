@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <header>
-      {/* Styling for nav routes */}
+      {/* Styling for navbar routes */}
       <nav className="box-border flex-1 text-left m-3">
         <ul>
           {" "}
