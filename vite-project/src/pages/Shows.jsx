@@ -5,7 +5,10 @@ import Header from "../components/Header";
 export default function Shows() {
   return (
     <>
-      {/* <h1>All shows display here</h1> */}
+      <div>
+        <h1 className="text-3xl text-left">All available shows</h1>
+      </div>
+      {/* <h1>All available shows</h1> */}
       <div>
         <nav>
           <Header />

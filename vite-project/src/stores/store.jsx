@@ -8,14 +8,16 @@ const usePreviewStore = create((set) => ({
 
   fetchAllShows: async () => {
     try {
-      // Fetching all shows data
+      // Adding every fetched shows data into localstorage
       let previewAllShows = JSON.parse(localStorage.getItem("previews"));
       if (!previewAllShows) {
+        // Fetching all shows data
         const response = await fetch("https://podcast-api.netlify.app");
         previewAllShows = await response.json();
         localStorage.setItem("previews", JSON.stringify(previewAllShows));
         set({ previews: previewAllShows, error: null });
       }
+      // Checking for any errors while fetching
     } catch (error) {
       set({ previews: null, error: error });
       console.log(error, "error fetching");
