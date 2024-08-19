@@ -3,7 +3,7 @@ import { create } from "zustand";
 const usePreviewStore = create((set) => ({
   // Stores initial state
   // Adding previews data to localstorage
-  previews: JSON.parse(localStorage.getItem("previews")) || [],
+  previews: JSON.parse(localStorage.getItem("previews")) || null,
   error: null,
 
   // Fetch and store all shows

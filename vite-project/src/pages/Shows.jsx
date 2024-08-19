@@ -29,7 +29,21 @@ function Shows() {
         </nav>
       </div>
       <div>
-        <ul>
+        {previews &&
+          previews.map((preview) => (
+            <li key={preview.id}>
+              <Link to={`/Shows/${preview.id}`}>{preview.title}</Link>
+            </li>
+          ))}
+      </div>
+    </>
+  );
+}
+
+export default Shows;
+
+{
+  /* <ul>
           {previews &&
             previews.map((preview) => (
               <li key={preview.id}>
@@ -39,19 +53,5 @@ function Shows() {
                 <div>{preview.description}</div>
               </li>
             ))}
-        </ul>
-      </div>
-    </>
-  );
-}
-
-export default Shows;
-
-{
-  /* {previews &&
-          previews.map((preview) => (
-            <li key={preview.id}>
-              <Link to={`/Shows/${preview.id}`}>{preview.title}</Link>
-            </li>
-          ))} */
+        </ul> */
 }
