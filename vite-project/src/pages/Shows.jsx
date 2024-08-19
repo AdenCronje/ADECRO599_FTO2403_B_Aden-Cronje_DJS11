@@ -30,14 +30,15 @@ function Shows() {
       </div>
       <div>
         <ul>
-          {previews.map((preview) => (
-            <li key={preview.id}>
-              <div>
-                {preview.id}. {preview.title}
-              </div>
-              <div>{preview.description}</div>
-            </li>
-          ))}
+          {previews &&
+            previews.map((preview) => (
+              <li key={preview.id}>
+                <div>
+                  {preview.id}. {preview.title}
+                </div>
+                <div>{preview.description}</div>
+              </li>
+            ))}
         </ul>
       </div>
     </>
