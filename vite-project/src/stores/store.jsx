@@ -15,12 +15,13 @@ const usePreviewStore = create((set) => ({
         // Fetching all shows data
         const response = await fetch("https://podcast-api.netlify.app");
         previewAllShows = await response.json();
+        // Sorting shows alphabetically by title
         const sortedShows = previewAllShows.sort((a, b) => {
           if (a.title < b.title) return -1;
           if (a.title > b.title) return 1;
           return 0;
         });
-
+        // Adding the sorted array to the localstorage
         localStorage.setItem("previews", JSON.stringify(sortedShows));
         set({ previews: sortedShows, error: null });
       }
