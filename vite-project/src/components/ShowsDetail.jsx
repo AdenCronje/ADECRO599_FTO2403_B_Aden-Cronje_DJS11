@@ -21,12 +21,12 @@ function showDetails() {
     fetchData();
   }, [fetchSingleShow, previewId]);
 
-return(
-  <div>
 
-  
-  </div>
-)
+  return (
+<div>
 
-
+</div>
+  ) 
 }
+
+export default showDetails;

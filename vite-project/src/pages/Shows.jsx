@@ -32,6 +32,9 @@ function Shows() {
         {previews &&
           previews.map((preview) => (
             <li key={preview.id}>
+              <div className="">
+                <img src={preview.image} alt="Shows images" />
+              </div>
               <Link
                 className=""
                 to={`/Shows/${preview.id}`}
