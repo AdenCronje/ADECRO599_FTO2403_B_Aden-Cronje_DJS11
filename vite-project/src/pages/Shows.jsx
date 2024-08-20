@@ -28,11 +28,14 @@ function Shows() {
           <Header />
         </nav>
       </div>
-      <div>
+      <div className="text-center">
         {previews &&
           previews.map((preview) => (
             <li key={preview.id}>
-              <Link to={`/Shows/${preview.id}`}>{preview.title}</Link>
+              <Link
+                className=""
+                to={`/Shows/${preview.id}`}
+              >{`${preview.title}`}</Link>
             </li>
           ))}
       </div>
