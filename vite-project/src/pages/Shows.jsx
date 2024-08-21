@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Header from "../components/Header";
 import usePreviewStore from "../stores/store";
 
-function Shows() {
+async function Shows() {
   // State of previewStore and favStore
   const { previews, fetchAllShows, error } = usePreviewStore();
 
@@ -14,6 +14,11 @@ function Shows() {
       fetchAllShows();
     }
   }, [fetchAllShows, previews]);
+
+  // Logic for filtering shows by genre
+  // const displayedShows = genreFilter
+  //   ? previews.filter((preview) => preview.genres === genreFilter)
+  //   : previews;
 
   // Displays an error message on page if data is fetched incorrectly
   if (error) {
@@ -42,7 +47,6 @@ function Shows() {
             </ul>
           ))}
       </div>
-      <div></div>
     </>
   );
 }

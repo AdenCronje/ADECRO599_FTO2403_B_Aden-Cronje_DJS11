@@ -7,6 +7,7 @@ function ShowDetails() {
   const { previewId } = useParams();
   const { fetchSingleShow } = usePreviewStore();
   const [preview, setPreview] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +27,13 @@ function ShowDetails() {
       <Link to="/Shows" className="">
         ⬅️Back to all shows
       </Link>
-      <h2 className="my-5">{preview && preview.description}</h2>
+      <p className="my-5">{preview && preview.description}</p>
+      <div>
+        <h2>Available Seasons: {preview && preview.seasons}</h2>
+      </div>
+      <div>
+        <h3>{preview && preview.episodes}</h3>
+      </div>
       <div>
         
       </div>
