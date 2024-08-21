@@ -28,12 +28,12 @@ function Shows() {
           <Header />
         </nav>
       </div>
-      <div className="text-center">
+      <div className="text-center my-8">
         {previews &&
           previews.map((preview) => (
             <ul key={preview.id}>
-              <div className="">
-                <img src={preview.image} alt="Shows images" className="" />
+              <div className="flex justify-center">
+                <img src={preview.image} alt="Shows images" />
               </div>
               <Link
                 className=""
@@ -42,6 +42,7 @@ function Shows() {
             </ul>
           ))}
       </div>
+      <div></div>
     </>
   );
 }

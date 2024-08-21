@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import usePreviewStore from "../stores/store";
 import { useEffect, useState } from "react";
 
@@ -21,9 +21,15 @@ function ShowDetails() {
   }, [fetchSingleShow, previewId]);
 
   return (
-    <div>
-      <h1>{preview && preview.title}</h1>
-      <h2>{preview && preview.description}</h2>
+    <div className="p-8">
+      <h1 className="text-4xl">{preview && preview.title}</h1>
+      <Link to="/Shows" className="">
+        ⬅️Back to all shows
+      </Link>
+      <h2 className="my-5">{preview && preview.description}</h2>
+      <div>
+        
+      </div>
     </div>
   );
 }
