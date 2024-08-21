@@ -1,9 +1,8 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import usePreviewStore from "../stores/store";
 import { useEffect, useState } from "react";
 
-function showDetails() {
+function ShowDetails() {
   // Fetching preview id using params
   const { previewId } = useParams();
   const { fetchSingleShow } = usePreviewStore();
@@ -21,12 +20,12 @@ function showDetails() {
     fetchData();
   }, [fetchSingleShow, previewId]);
 
-
   return (
-<div>
-
-</div>
-  ) 
+    <div>
+      <h1>{preview && preview.title}</h1>
+      <h2>{preview && preview.description}</h2>
+    </div>
+  );
 }
 
-export default showDetails;
+export default ShowDetails;

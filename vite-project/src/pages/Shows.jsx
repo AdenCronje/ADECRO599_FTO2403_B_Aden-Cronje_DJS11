@@ -31,15 +31,15 @@ function Shows() {
       <div className="text-center">
         {previews &&
           previews.map((preview) => (
-            <li key={preview.id}>
+            <ul key={preview.id}>
               <div className="">
-                <img src={preview.image} alt="Shows images" />
+                <img src={preview.image} alt="Shows images" className="" />
               </div>
               <Link
                 className=""
                 to={`/Shows/${preview.id}`}
               >{`${preview.title}`}</Link>
-            </li>
+            </ul>
           ))}
       </div>
     </>
