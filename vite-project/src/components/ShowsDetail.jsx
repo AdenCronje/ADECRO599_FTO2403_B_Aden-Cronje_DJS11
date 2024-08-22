@@ -43,15 +43,66 @@ function ShowDetails() {
   }
 
   return (
+    // Displays the shows data from the preview endpoint
     <div className="p-8">
       <h1 className="text-4xl">{preview && preview.title}</h1>
       <Link to="/Shows" className="">
         ⬅️Back to all shows
       </Link>
       <p className="my-5">{preview && preview.description}</p>
-      <div></div>
+      <div>
+        {/* Displaying the seasons object data and nested episodes data */}
+        {seasonsData.seasons.map(({ season, title, image, episodes }) => (
+          <div key={season} className="mb-5">
+            <h2 className="text-2xl font-semibold">{title}</h2>
+            {image && <img src={image} alt={title} />}
+            <ul>
+              {episodes.map(({ episode, title, description, file }) => (
+                <li key={episode} className="my-2">
+                  <strong>{title}</strong> - {description}
+                  <br />
+                  <a
+                    href={file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500"
+                  >
+                    Listen
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default ShowDetails;
+
+{
+  /* // {seasonsData.seasons && seasonsData.seasons.length > 0 ? (
+//   seasonsData.seasons.map(({ season, title, image, episodes }) => (
+//     <div key={season} className="mb-5">
+//       <h2 className="text-2xl font-semibold">{title}</h2>
+//       {image && <img src={image} alt={title} className="mb-4 w-full max-w-md"/>}
+//       <ul>
+//         {episodes && episodes.length > 0 ? (
+//           episodes.map(({ episode, title, description, file }) => (
+//             <li key={episode} className="my-2">
+//               <strong>{title}</strong> - {description}
+//               <br />
+//               <a href={file} target="_blank" rel="noopener noreferrer" className="text-blue-500">Listen</a>
+//             </li>
+//           ))
+//         ) : (
+//           <li>No episodes available</li>
+//         )}
+//       </ul>
+//     </div>
+//   ))
+// ) : (
+//   <p>No seasons data available</p>
+// )} */
+}
