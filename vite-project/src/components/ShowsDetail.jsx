@@ -29,14 +29,9 @@ function ShowDetails() {
       </Link>
       <p className="my-5">{preview && preview.description}</p>
       <div>
-        <h2>Available Seasons: {preview && preview.seasons}</h2>
-      </div>
-      <div>
         <h3>{preview && preview.episodes}</h3>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   );
 }

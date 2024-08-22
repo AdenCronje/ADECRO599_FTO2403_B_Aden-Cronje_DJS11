@@ -45,6 +45,9 @@ function Shows() {
                 to={`/Shows/${preview.id}`}
               >{`${preview.title}`}</Link>
               <h2>Seasons: {preview && preview.seasons}</h2>
+              <p className="text-sm">
+                Last Updated: {preview && preview.updated}
+              </p>
             </ul>
           ))}
       </div>
