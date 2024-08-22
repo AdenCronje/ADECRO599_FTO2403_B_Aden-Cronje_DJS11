@@ -7,6 +7,7 @@ function ShowDetails() {
   const { previewId } = useParams();
   const { fetchSingleShow } = usePreviewStore();
   const [preview, setPreview] = useState(null);
+  const [seasonsData, setSeasonsData] = useState(null);
   // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,26 @@ function ShowDetails() {
     fetchData();
   }, [fetchSingleShow, previewId]);
 
+  // Fetching seasons and episodes data from API
+  useEffect(() => {
+    const fetchSeasons = async () => {
+      try {
+        const response = await fetch(
+          `https://podcast-api.netlify.app/id/${previewId}`
+        );
+        const result = await response.json();
+        setSeasonsData(result);
+      } catch (error) {
+        console.log("failed fetch", error);
+      }
+    };
+    fetchSeasons();
+  }, [previewId]);
+
+  if (!seasonsData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="p-8">
       <h1 className="text-4xl">{preview && preview.title}</h1>
@@ -28,9 +49,6 @@ function ShowDetails() {
         ⬅️Back to all shows
       </Link>
       <p className="my-5">{preview && preview.description}</p>
-      <div>
-        <h3>{preview && preview.episodes}</h3>
-      </div>
       <div></div>
     </div>
   );
