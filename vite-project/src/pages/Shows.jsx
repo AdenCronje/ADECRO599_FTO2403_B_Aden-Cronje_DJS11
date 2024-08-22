@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Header from "../components/Header";
 import usePreviewStore from "../stores/store";
 
-async function Shows() {
+function Shows() {
   // State of previewStore and favStore
   const { previews, fetchAllShows, error } = usePreviewStore();
 
@@ -33,7 +33,7 @@ async function Shows() {
           <Header />
         </nav>
       </div>
-      <div className="text-center my-8">
+      <div className="text-center my-8 grid grid-cols-2">
         {previews &&
           previews.map((preview) => (
             <ul key={preview.id}>
@@ -44,6 +44,7 @@ async function Shows() {
                 className=""
                 to={`/Shows/${preview.id}`}
               >{`${preview.title}`}</Link>
+              <h2>Seasons: {preview && preview.seasons}</h2>
             </ul>
           ))}
       </div>
