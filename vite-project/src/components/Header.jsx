@@ -12,7 +12,7 @@ export default function Header() {
             <Link to="/">Homepage</Link>
           </li>
           <li>
-            <Link className="nav">Favorites</Link>
+            <Link path="/Favourites">Favourites</Link>
           </li>
         </ul>
       </nav>

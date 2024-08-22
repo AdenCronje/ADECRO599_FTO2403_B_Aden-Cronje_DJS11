@@ -3,6 +3,7 @@ import Home from "../src/pages/Home";
 import Shows from "../src/pages/Shows";
 import "./App.css";
 import ShowDetails from "./components/ShowsDetail";
+import Favourites from "./pages/Favourites";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/Shows" element={<Shows />} />
 
         <Route path="/Shows/:previewId" element={<ShowDetails />} />
+        <Route path="/Favourites" element={<Favourites />} />
       </Routes>
     </BrowserRouter>
   );
