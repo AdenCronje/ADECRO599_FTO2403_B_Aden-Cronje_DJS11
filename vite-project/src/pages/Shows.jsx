@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "../components/Header";
 import usePreviewStore from "../stores/store";
+import HandleButton from "../components/HandleButton";
 
 function Shows() {
   // State of previewStore and favStore
@@ -30,7 +31,7 @@ function Shows() {
       </div>
       <div>
         <h2 className="m-3">Filter List:</h2>
-        
+        <HandleButton />
       </div>
       <div className="text-center my-8 grid grid-cols-2">
         {previews &&
@@ -55,8 +56,3 @@ function Shows() {
 }
 
 export default Shows;
-
-// Logic for filtering shows by genre
-// const displayedShows = genreFilter
-//   ? previews.filter((preview) => preview.genres === genreFilter)
-//   : previews;
