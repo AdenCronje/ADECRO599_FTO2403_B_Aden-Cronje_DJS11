@@ -41,7 +41,7 @@ function Shows() {
                 <img src={preview.image} alt="Shows images" />
               </div>
               <Link
-                className=""
+                className="text-lg"
                 to={`/Shows/${preview.id}`}
               >{`${preview.title}`}</Link>
               <h2>Seasons: {preview && preview.seasons}</h2>
