@@ -36,6 +36,7 @@ const usePreviewStore = create((set) => ({
   // Fetching a single show
   fetchSingleShow: async (previewId) => {
     try {
+      // Storing data in local storage
       let previewAllShows = JSON.parse(localStorage.getItem("previews"));
       const singlePreview = previewAllShows.find(
         (preview) => preview.id == previewId

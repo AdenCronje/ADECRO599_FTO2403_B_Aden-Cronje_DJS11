@@ -15,11 +15,6 @@ function Shows() {
     }
   }, [fetchAllShows, previews]);
 
-  // Logic for filtering shows by genre
-  // const displayedShows = genreFilter
-  //   ? previews.filter((preview) => preview.genres === genreFilter)
-  //   : previews;
-
   // Displays an error message on page if data is fetched incorrectly
   if (error) {
     return <h1>Data fetching failed</h1>;
@@ -32,6 +27,10 @@ function Shows() {
         <nav>
           <Header />
         </nav>
+      </div>
+      <div>
+        <h2 className="m-3">Filter List:</h2>
+        
       </div>
       <div className="text-center my-8 grid grid-cols-2">
         {previews &&
@@ -57,16 +56,7 @@ function Shows() {
 
 export default Shows;
 
-{
-  /* <ul>
-          {previews &&
-            previews.map((preview) => (
-              <li key={preview.id}>
-                <div>
-                  {preview.id}. {preview.title}
-                </div>
-                <div>{preview.description}</div>
-              </li>
-            ))}
-        </ul> */
-}
+// Logic for filtering shows by genre
+// const displayedShows = genreFilter
+//   ? previews.filter((preview) => preview.genres === genreFilter)
+//   : previews;

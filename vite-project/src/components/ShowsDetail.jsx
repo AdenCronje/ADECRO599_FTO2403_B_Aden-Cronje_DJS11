@@ -12,6 +12,7 @@ function ShowDetails() {
   const { favs, toggleFav } = useFavStore();
   // const [loading, setLoading] = useState(false);
 
+  // Grabbing data for a single show from API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,6 +41,7 @@ function ShowDetails() {
     fetchSeasons();
   }, [previewId]);
 
+  // Loading for when there's a wait period for show details
   if (!seasonsData) {
     return <div>Loading...</div>;
   }
