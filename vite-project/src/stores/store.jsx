@@ -1,9 +1,12 @@
 import { create } from "zustand";
+import genreTitles from "../../../genreTitles";
 
 const usePreviewStore = create((set) => ({
   // Stores initial state
   // Adding previews data to localstorage
-  previews: JSON.parse(localStorage.getItem("previews")) || null,
+  previews: JSON.parse(localStorage.getItem("previews")) || [],
+  // keep an unmodified copy so we can restore after filtering
+  allPreviews: JSON.parse(localStorage.getItem("previews")) || [],
   error: null,
 
   // Fetch and store all shows
@@ -21,9 +24,9 @@ const usePreviewStore = create((set) => ({
           if (a.title > b.title) return 1;
           return 0;
         });
-        // Adding the sorted array to the localstorage
+        // Adding the sorted array to the localstorage and store
         localStorage.setItem("previews", JSON.stringify(sortedShows));
-        set({ previews: sortedShows, error: null });
+        set({ previews: sortedShows, allPreviews: sortedShows, error: null });
       }
       // Checking for any errors while fetching
     } catch (error) {
@@ -49,6 +52,34 @@ const usePreviewStore = create((set) => ({
       return null;
     }
   },
+
+  // Filter previews by genre name (uses genreTitles mapping)
+  filterByGenre: (genreName) =>
+    set((state) => {
+      const all =
+        state.allPreviews && state.allPreviews.length
+          ? state.allPreviews
+          : JSON.parse(localStorage.getItem("previews")) || [];
+
+      if (!genreName || genreName === "All") {
+        return { previews: all };
+      }
+
+      // Find numeric genre id from genreTitles mapping
+      const entry = Object.entries(genreTitles).find(
+        ([, title]) => title === genreName
+      );
+      if (!entry) {
+        // If we don't have a mapping for this genre name, return all
+        return { previews: all };
+      }
+      const genreId = Number(entry[0]);
+
+      const filtered = all.filter(
+        (p) => Array.isArray(p.genres) && p.genres.includes(genreId)
+      );
+      return { previews: filtered };
+    }),
 }));
 
 export default usePreviewStore;

@@ -7,6 +7,13 @@ function HandleButton() {
 
   let showPreviews = preview;
 
+  // Use the store's filter action
+  const { filterByGenre } = usePreviewStore();
+  const handleFilterChange = (type, value) => {
+    // currently type is unused (kept for compatibility with previous callers)
+    filterByGenre(value);
+  };
+
   // Matching genre titles to genre Id
   const getGenreTitle = (genreId) => {
     return genreTitles[genreId];
@@ -16,11 +23,11 @@ function HandleButton() {
     console.log("Error", error);
   }
 
-  //   if (genreTitles === showPreviews) {
-  //     showPreviews.filter("type");
-  //   } else {
-  //     showPreviews.sort((a, b) => a.title.localeCompare(b.title));
-  //   }
+  // if (genreTitles === showPreviews) {
+  //   showPreviews.filter("type");
+  // } else {
+  //   showPreviews.sort((a, b) => a.title.localeCompare(b.title));
+  // }
 
   return (
     <div className="grid grid-cols-3 place-content-evenly">
