@@ -9,7 +9,7 @@ function ShowDetails() {
   const { fetchSingleShow } = usePreviewStore();
   const [preview, setPreview] = useState(null);
   const [seasonsData, setSeasonsData] = useState(null);
-  const { favs, toggleFav } = useFavStore();
+  const { toggleEpisodeFav, isEpisodeFav } = useFavStore();
   // const [loading, setLoading] = useState(false);
 
   // Grabbing data for a single show from API
@@ -46,12 +46,20 @@ function ShowDetails() {
     return <div>Loading...</div>;
   }
 
-  const handleFavClick = (episode) => {
-    toggleFav(episode);
-  };
-
-  const isFav = (previewId) => {
-    return favs.some((fav) => fav.id === previewId);
+  // When the user clicks Favorite on an episode we call into the FavStore
+  // toggleEpisodeFav action. We pass showId + episodeId so the store can
+  // uniquely identify the episode across different shows. We also include
+  // title/file so the favorites page can show/play the episode without extra
+  // network lookups.
+  const handleFavClick = (episodeObj) => {
+    // episodeObj: { episode, title, description, file }
+    const episodeId = episodeObj.episode;
+    toggleEpisodeFav({
+      showId: previewId,
+      episodeId,
+      title: episodeObj.title,
+      file: episodeObj.file,
+    });
   };
 
   return (
@@ -72,8 +80,14 @@ function ShowDetails() {
               {episodes.map(({ episode, title, description, file }) => (
                 <li key={episode} className="my-2">
                   <strong>{title}</strong> - {description}{" "}
-                  <button onClick={() => handleFavClick(episode)}>
-                    {isFav(episode.id) ? "Unfavorite" : "Favorite"}
+                  <button
+                    onClick={() =>
+                      handleFavClick({ episode, title, description, file })
+                    }
+                  >
+                    {isEpisodeFav(previewId, episode)
+                      ? "Unfavorite"
+                      : "Favorite"}
                   </button>
                   <br />
                   <audio controls>

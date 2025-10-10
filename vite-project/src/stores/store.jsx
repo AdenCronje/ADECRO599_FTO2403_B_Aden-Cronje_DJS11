@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import genreTitles from "../../../genreTitles";
 
+// Preview store: manages the fetched list of shows (previews). To support
+// filtering we keep both `previews` (current view) and `allPreviews` (the
+// original full list) so the UI can restore the full list when needed.
 const usePreviewStore = create((set) => ({
   // Stores initial state
   // Adding previews data to localstorage
@@ -54,6 +57,9 @@ const usePreviewStore = create((set) => ({
   },
 
   // Filter previews by genre name (uses genreTitles mapping)
+  // Accepts a human-readable genre label (e.g. "Comedy"). We map that
+  // label back to the numeric genre id using `genreTitles.js` and filter
+  // the original `allPreviews` list by `p.genres` which is an array of ids.
   filterByGenre: (genreName) =>
     set((state) => {
       const all =
