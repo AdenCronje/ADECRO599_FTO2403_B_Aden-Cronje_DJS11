@@ -2,14 +2,11 @@ import { create } from "zustand";
 import genreTitles from "../../../genreTitles";
 
 // Preview store: manages the fetched list of shows (previews). To support
-// filtering we keep both `previews` (current view) and `allPreviews` (the
-// original full list) so the UI can restore the full list when needed.
 const usePreviewStore = create((set) => ({
   // Stores initial state
-  // Adding previews data to localstorage
-  previews: JSON.parse(localStorage.getItem("previews")) || [],
+  previews: JSON.parse(localStorage.getItem("previews")) || null,
   // keep an unmodified copy so we can restore after filtering
-  allPreviews: JSON.parse(localStorage.getItem("previews")) || [],
+  allPreviews: JSON.parse(localStorage.getItem("previews")) || null,
   error: null,
 
   // Fetch and store all shows

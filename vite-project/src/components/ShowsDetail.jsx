@@ -43,7 +43,9 @@ function ShowDetails() {
 
   // Loading for when there's a wait period for show details
   if (!seasonsData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-6 w-6 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
+    );
   }
 
   // When the user clicks Favorite on an episode we call into the FavStore
