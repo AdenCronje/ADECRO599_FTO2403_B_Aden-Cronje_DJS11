@@ -6,7 +6,7 @@ function HandleButton() {
   // The HandleButton component renders filter buttons for genres. It uses
   // the preview store's `filterByGenre` action implemented in `store.jsx`.
   // Each button calls handleFilterChange which forwards the chosen label
-  // (e.g. "Comedy") to the store. The store maps that label to a numeric
+  // to the store. The store maps that label to a numeric
   // genre id (via `genreTitles.js`) and filters the previews accordingly.
   const { preview, error } = usePreviewStore();
 

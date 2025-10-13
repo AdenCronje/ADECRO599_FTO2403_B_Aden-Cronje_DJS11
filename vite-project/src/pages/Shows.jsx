@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Header from "../components/Header";
 import usePreviewStore from "../stores/store";
 import HandleButton from "../components/HandleButton";
+import "../components/AudioPlayer";
 
 function Shows() {
   // State of previewStore and favStore
