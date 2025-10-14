@@ -10,7 +10,10 @@ function ShowDetails() {
   const [preview, setPreview] = useState(null);
   const [seasonsData, setSeasonsData] = useState(null);
   const { toggleEpisodeFav, isEpisodeFav } = useFavStore();
-  // const [loading, setLoading] = useState(false);
+
+  // Dropdown state
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedSeasonIdx, setSelectedSeasonIdx] = useState(0);
 
   // Grabbing data for a single show from API
   useEffect(() => {
@@ -71,35 +74,84 @@ function ShowDetails() {
       <Link to="/Shows" className="">
         ⬅️Back to all shows
       </Link>
+      <h1 className="mt-5">Description:</h1>
       <p className="my-5">{preview && preview.description}</p>
+      {/* Custom Dropdown for Seasons - Enhanced Styling */}
+      <div className="mb-6 relative inline-block">
+        <button
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg border-2 border-violet-400 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200 flex items-center justify-between min-w-[12rem]"
+          onClick={() => setDropdownOpen((open) => !open)}
+        >
+          <span>
+            {seasonsData.seasons[selectedSeasonIdx]?.title || "Select Season"}
+          </span>
+          <span
+            className={`ml-3 transition-transform duration-200 ${
+              dropdownOpen ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            ▼
+          </span>
+        </button>
+        {dropdownOpen && (
+          <ul className="absolute left-0 mt-2 min-w-[12rem] bg-white border border-blue-200 rounded-xl shadow-xl z-10 transition-all duration-200 animate-fade-in">
+            {seasonsData.seasons.map((seasonObj, idx) => (
+              <li
+                key={seasonObj.season}
+                className={`px-5 py-3 cursor-pointer transition-colors duration-150 rounded-lg mb-1 last:mb-0
+                  ${
+                    selectedSeasonIdx === idx
+                      ? "bg-blue-100 font-bold text-blue-700"
+                      : "hover:bg-blue-50 text-gray-700"
+                  }`}
+                onClick={() => {
+                  setSelectedSeasonIdx(idx);
+                  setDropdownOpen(false);
+                }}
+              >
+                {seasonObj.title}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {/* Display selected season's details and episodes */}
       <div>
-        {/* Displaying the seasons object data and nested episodes data */}
-        {seasonsData.seasons.map(({ season, title, image, episodes }) => (
-          <div key={season} className="mb-5">
-            <h2 className="text-2xl font-semibold">{title}</h2>
-            {image && <img src={image} alt={title} />}
+        {seasonsData.seasons[selectedSeasonIdx] && (
+          <div className="mb-5">
+            <h2 className="text-2xl font-semibold">
+              {seasonsData.seasons[selectedSeasonIdx].title}
+            </h2>
+            {seasonsData.seasons[selectedSeasonIdx].image && (
+              <img
+                src={seasonsData.seasons[selectedSeasonIdx].image}
+                alt={seasonsData.seasons[selectedSeasonIdx].title}
+              />
+            )}
             <ul>
-              {episodes.map(({ episode, title, description, file }) => (
-                <li key={episode} className="my-2">
-                  <strong>{title}</strong> - {description}{" "}
-                  <button
-                    onClick={() =>
-                      handleFavClick({ episode, title, description, file })
-                    }
-                  >
-                    {isEpisodeFav(previewId, episode)
-                      ? "Unfavorite"
-                      : "Favorite"}
-                  </button>
-                  <br />
-                  <audio controls>
-                    <source src={file} type="audio/mp3" />
-                  </audio>
-                </li>
-              ))}
+              {seasonsData.seasons[selectedSeasonIdx].episodes.map(
+                ({ episode, title, description, file }) => (
+                  <li key={episode} className="my-2">
+                    <strong>{title}</strong> - {description}{" "}
+                    <button
+                      onClick={() =>
+                        handleFavClick({ episode, title, description, file })
+                      }
+                    >
+                      {isEpisodeFav(previewId, episode)
+                        ? "Unfavorite"
+                        : "Favorite"}
+                    </button>
+                    <br />
+                    <audio controls>
+                      <source src={file} type="audio/mp3" />
+                    </audio>
+                  </li>
+                )
+              )}
             </ul>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
