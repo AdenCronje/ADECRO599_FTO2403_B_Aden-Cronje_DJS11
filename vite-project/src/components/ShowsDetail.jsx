@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import usePreviewStore from "../stores/store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useFavStore from "../stores/FavStore";
+import AudioPlayer from 'react-h5-audio-player';
 
 function ShowDetails() {
   // Fetching preview id using params
@@ -14,6 +15,10 @@ function ShowDetails() {
   // Dropdown state
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedSeasonIdx, setSelectedSeasonIdx] = useState(0);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
+  
+  // Refs for all audio players
+  const audioRefs = useRef({});
 
   // Grabbing data for a single show from API
   useEffect(() => {
@@ -143,9 +148,40 @@ function ShowDetails() {
                         : "Favorite"}
                     </button>
                     <br />
-                    <audio controls>
-                      <source src={file} type="audio/mp3" />
-                    </audio>
+                    <div className="my-4 px-4 py-2 bg-gray-50 rounded-lg shadow">
+                      <AudioPlayer
+                        ref={ref => audioRefs.current[episode] = ref}
+                        src={file}
+                        onPlay={() => {
+                          // Pause all other players when one starts playing
+                          setCurrentlyPlaying(episode);
+                          Object.entries(audioRefs.current).forEach(([ep, player]) => {
+                            if (ep !== episode && player?.audio?.current) {
+                              player.audio.current.pause();
+                            }
+                          });
+                        }}
+                        className="rounded-lg bg-white"
+                        showJumpControls={false}
+                        customControlsSection={[
+                          "MAIN_CONTROLS",
+                          "VOLUME_CONTROLS",
+                          "PROGRESS_BAR"
+                        ]}
+                        customProgressBarSection={[
+                          "PROGRESS_BAR",
+                          "CURRENT_TIME",
+                          "DURATION"
+                        ]}
+                        autoPlayAfterSrcChange={false}
+                        layout="horizontal"
+                        style={{
+                          boxShadow: 'none',
+                          background: 'white',
+                          width: '100%'
+                        }}
+                      />
+                    </div>
                   </li>
                 )
               )}
